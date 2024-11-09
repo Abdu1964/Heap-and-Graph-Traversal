@@ -2,29 +2,29 @@ name: Python CI/CD
 
 on:
   push:
-    branches: [main]
+    branches: [main]  # Trigger workflow on pushes to 'main' branch
   pull_request:
-    branches: [main]
-  workflow_dispatch:
+    branches: [main]  # Trigger workflow on pull requests to 'main' branch
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Run the workflow on the latest Ubuntu runner
 
     steps:
       - name: Check out the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2  # Check out the code in the repository
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.x'  # Use Python version 3.x
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install pytest  # Install pytest directly if no requirements.txt
+          python -m pip install --upgrade pip  # Upgrade pip
+          pip install pytest  # Install pytest to run the tests
 
       - name: Run Tests
         run: |
-          pytest main.py
+          pytest test_graph.py  # Run the tests in 'test_graph.py' file
